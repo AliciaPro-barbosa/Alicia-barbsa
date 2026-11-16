@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="p-5 mb-4 bg-body-tertiary rounded-3">
+    <h1 class="display-5 fw-bold">Bem-vindo à Minha Loja</h1>
+    <p class="fs-5">Encontre os melhores produtos com entrega rápida e preço justo.</p>
+    <a class="btn btn-primary btn-lg" href="{{ url_for('loja.vitrine') }}">Ver todos os produtos</a>
+</div>
+
+<h2 class="mb-3">Destaques</h2>
+{% if destaques %}
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+    {% for p in destaques %}
+    <div class="col">{% include "_card_produto.html" %}</div>
+    {% endfor %}
+</div>
+{% else %}
+<p class="text-muted">Nenhum produto cadastrado ainda.</p>
+{% endif %}
+{% endblock %}

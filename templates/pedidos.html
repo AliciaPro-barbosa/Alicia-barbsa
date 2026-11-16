@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Meus Pedidos{% endblock %}
+{% block content %}
+<h1 class="mb-3">Meus pedidos</h1>
+{% for pedido in pedidos %}
+<div class="card mb-3">
+    <div class="card-header d-flex justify-content-between">
+        <strong>Pedido #{{ pedido.id }}</strong>
+        <span>{{ pedido.criado_em.strftime('%d/%m/%Y %H:%M') }}</span>
+    </div>
+    <ul class="list-group list-group-flush">
+        {% for i in pedido.itens %}
+        <li class="list-group-item d-flex justify-content-between">
+            <span>{{ i.quantidade }}x {{ i.nome_produto }}</span>
+            <span>R$ {{ '%.2f'|format(i.preco_unitario * i.quantidade)|replace('.', ',') }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+    <div class="card-footer text-end"><strong>Total: R$ {{ '%.2f'|format(pedido.total)|replace('.', ',') }}</strong></div>
+</div>
+{% else %}
+<p class="text-muted">Você ainda não fez nenhum pedido.</p>
+{% endfor %}
+{% endblock %}
